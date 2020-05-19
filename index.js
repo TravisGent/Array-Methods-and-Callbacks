@@ -97,18 +97,23 @@ function getYears(getFinalsArray) {
         newArrayOfDataTwo.push(getFinalsArray[i].Year);
     }
     return newArrayOfDataTwo;
-};
+}
 
 console.log(getYears(getFinals(fifaData)));
 
 /* Task 5: Implement a higher-order function called `getWinners`, that accepts the callback function `getFinals()` and determine the winner (home or away) of each `finals` game. Return the name of all winning countries in an array called `winners` */ 
 
-function getWinners(getFinalsArrayTwo) {
-    let winners = [];
+function getWinners(getFinalsArray) {
+    let newArrayOfDataThree = [];
 
-};
+    for(let x = 0; x < getFinalsArray.length; x++)
+    {
+        newArrayOfDataThree.push(getFinalsArray[x]["Win conditions"]);
+    }
+    return newArrayOfDataThree;
+}
 
-getWinners();
+console.log(getWinners(getFinals(fifaData)));
 
 /* Task 6: Implement a higher-order function called `getWinnersByYear` that accepts the following parameters and returns a set of strings "In {year}, {country} won the world cup!" 
 
@@ -117,21 +122,45 @@ Parameters:
  * callback function getYears
  */
 
-function getWinnersByYear(/* code here */) {
+function getWinnersByYear(getWinnersArray, getYearsArray) {
+    let newArrayOfDataFour = [];
 
-};
+    for(let i = 0; i < getWinnersArray.length; i++)
+    {
+        newArrayOfDataFour.push(`In ${getYearsArray[i]}, ${getWinnersArray[i]} won the world cup!`);
+    }
+    return newArrayOfDataFour;
+}
 
-getWinnersByYear();
+console.log(getWinnersByYear(getWinners(getFinals(fifaData)), getYears(getFinals(fifaData))));
 
 /* Task 7: Write a function called `getAverageGoals` that accepts a parameter `data` and returns the the average number of home team goals and away team goals scored per match (Hint: use .reduce and do this in 2 steps) */
 
-function getAverageGoals(/* code here */) {
+function getAverageGoals(data) {
+    let arrayForAverageHome = [];
+    let arrayForAverageAway = [];
+    let numberWeWantHome = 0;
+    let numberWeWantAway = 0;
 
-    /* code here */
+    for(let i = 0; i < data.length; i++)
+    {
+        arrayForAverageHome.push(data[i]["Home Team Goals"]);
+        arrayForAverageAway.push(data[i]["Away Team Goals"]);
+    }
 
-};
+    for (let i = 0; i < arrayForAverageHome.length; i++)
+    {
+        numberWeWantHome += arrayForAverageHome[i];
+        numberWeWantAway += arrayForAverageAway[i];
+    }
 
-getAverageGoals();
+    numberWeWantHome = numberWeWantHome / arrayForAverageHome.length;
+    numberWeWantAway = numberWeWantAway / arrayForAverageAway.length;
+
+    return `The average goal for Home is ${numberWeWantHome} and the average goal for Away is ${numberWeWantAway}!`;
+}
+
+getAverageGoals(fifaData);
 
 /// STRETCH 🥅 //
 
